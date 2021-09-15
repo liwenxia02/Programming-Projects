@@ -59,6 +59,37 @@ int main() {
   //TO DO: add your code here so that your program
   //produces output that would be identical to the
   //given sample run when provided the same input
-  printf("Welcome to the GPA calculator!\nEnter grade and credits for each course below (ctrl-d to end):") 
+  int numCourses = 0, numInput = 0;
+  double inCredit = 0., inGPA = 0., avgGPA=0.;
+  double accCredits = 0., accGPAs = 0.;
+  char inGrade = 0;
+  printf("Welcome to the GPA calculator!\nEnter grade and credits for each course below (ctrl-d to end):");
+
+  while(printf("course %d: ",++numCourses)&&(numInput=scanf(" %c%lf", &inGrade, &inCredit))!=EOF){
+    if(numInput!=2) printf("Wrong # of input for course %d\n", numCourses--);
+    else{
+      switch(inGrade){
+      case 'A': case 'a': inGPA = 4.; break;
+      case 'B': case 'b': inGPA = 3.; break;
+      case 'C': case 'c': inGPA = 2.; break;
+      case 'D': case 'd': inGPA = 1.; break;
+      case 'F': case 'f': inGPA = 0.; break;
+      default: printf("Wrong letter grade input: %c for course %d\n", inGrade, numCourses--);
+  }
+      if(inCredit>0){
+	accGPAs += inCredit * inGPA;
+	accCredits+=inCredit;
+      }
+      else printf("Input credit should be positive for course %d\n",numCourses--);
+    }
+  }
+    if(accCredits>0){
+      avgGPA = accGPAs/ accCredits;
+      printf("\nYour GPA is %lf\n", avgGPA);
+      if(avgGPA>=3.5) printf("Dean's List\n");
+      else if (avgGPA <= 2.0) printf("Uh-oh, Academic Probation...\n");
+    }
+    else printf("\nNo credits attempted; no GPA to report\n");
  return 0;
 }
+
