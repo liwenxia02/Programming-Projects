@@ -14,7 +14,7 @@ int main (void){
   int numInput = 0, selection = -1;
   const char item[3][9]={"cola","candybar","popcorn"}; 
   
-  printf("Welcome to the Vending Machine!\nEnter your choice by # and input cash amount, repeatedly (^d to end).");
+  printf("Welcome to the Vending Machine!\nEnter your choice by # and input cash amount, repeatedly (^d to end).\n");
   machine(stock,profit);
 
   //loop continues until error message or ctrl-d
