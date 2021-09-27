@@ -27,7 +27,7 @@ int main() {
 int getDate(int *month, int *day, int *year){
   int m, d, y;
   int inputs;
-  printf("Please input the date in the format MM/DD/YYYY\n");
+  printf("enter date in MM/DD/YYYY format: ");
   inputs = scanf("%d/%d/%d",&m,&d,&y);
   *month = m;
   *day = d;
