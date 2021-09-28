@@ -14,7 +14,23 @@
    array, maze width and maze height: open file, read sizes, read maze, close file
 */
 // TODO: write the entirety of this readMaze function
+//ask about readMaze
+int readMaze(filename, char maze[][200], const int maze_width, const int maze_height){
+  FILE*mazePtr=fopen(filename,"r");
+  if(mazePtr=NULL){
+    return -1;}
 
+  //the actual printing part
+  printf("%d %d\n",maze_width,maze_height);
+  char myChar;
+  int parse;
+  while(parse = fscanf(mazePtr,"%c",&myChar),parse!=EOF&&parse==1){
+    printf("%c,myChar);
+  }
+  if(ferror(filename)){
+    return -2;}
+  fclose(filename);
+  return 0;
 
 /* The function to write the maze to a file given the filename, maze
    array, maze width and maze height: open file, write maze, close file
