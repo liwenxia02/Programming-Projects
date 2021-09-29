@@ -15,29 +15,30 @@
 */
 // TODO: write the entirety of this readMaze function
 //ask about readMaze
-int readMaze(filename, char maze[][200], const int maze_width, const int maze_height){
+int readMaze(char* filename, char maze[][200], int* maze_width, int* maze_height){
   FILE*mazePtr=fopen(filename,"r");
-  if(mazePtr=NULL){
+  if(mazePtr==NULL){
     return -1;}
-
-  //the actual printing part
-  printf("%d %d\n",maze_width,maze_height);
   char myChar;
-  int parse;
-  while(parse = fscanf(mazePtr,"%c",&myChar),parse!=EOF&&parse==1){
-    printf("%c,myChar);
+  fscanf(mazePtr, "%d %d", maze_width, maze_height);
+  for(int r = 0; r < *maze_height; ++r){
+    for(int c = 0; c < *maze_width; ++c){
+      fscanf(mazePtr,"%c",&myChar);
+      maze[r][c]=myChar;
+    }
   }
-  if(ferror(filename)){
+  if(ferror(mazePtr)){
     return -2;}
-  fclose(filename);
+  fclose(mazePtr);
   return 0;
+}
 
 /* The function to write the maze to a file given the filename, maze
    array, maze width and maze height: open file, write maze, close file
 */
 // TODO: write the entirety of this writeMaze function
 
-int writeMaze(filename, char maze[][200], const int maze_width, const int maze_height){
+int writeMaze(char* filename, char maze[][200], const int maze_width, const int maze_height){
   FILE*mazePtr=fopen(filename,"w");
   if(mazePtr==NULL){
     return -4;}
@@ -45,25 +46,55 @@ int writeMaze(filename, char maze[][200], const int maze_width, const int maze_h
   for (int r = 0; r < maze_height; ++r){
     for(int c = 0; c < maze_width; ++c){
       if(c==maze_width-1)
-	{fprintf(mazePtr, "%c\n", maze[r][c]);}
+	{
+	  fprintf(mazePtr, "%c\n", maze[r][c]);
+	}
       else{
-	fprintf(mazePtr, "%c", maze[r][c]);}
-  if(ferror(filename)){
+	fprintf(mazePtr, "%c", maze[r][c]);
+      }}}
+  if(ferror(mazePtr)){
     return -5;}
-  fclose(filename);
+  fclose(mazePtr);
   return 0;
 }
 
 // The function to solve a solution path for the maze
 int solveMaze(char maze[][200], const int maze_width, const int maze_height, char sol[][200]) {
   // TODO: implement this function
-  return solvePath(maze, maze_width, maze_height, 0, 0, sol); // TODO: replace this stub
+  int startingR, startingC;
+  for(int r = 0; r < maze_height; r++){
+    for(int c = 0; c < maze_width; c++){
+      if(maze[r][c]=='@'){
+	 startingR=r;
+	 startingC=c;}
+      if(maze[r][c]==' '){
+        sol[r][c]='u';
+      }
+    }
+  }
+  return solvePath(maze, maze_width, maze_height, startingC, startingR, sol); 
 }
 
 // The function to solve a solution path recursively
 int solvePath(char maze[][200], const int maze_width, const int maze_height, const int col, const int row, char sol[][200]) {
   // TODO: implement this function
-  return 0; // TODO: replace this stub
+  //don't forget left, right, up, down
+  sol[row][col]='*';
+  if(maze[row][col]=='<'){ //base case
+    return 0;}
+  if(((maze[row][col-1]!='#')&&(sol[row][col-1]=='u'))||(maze[row][col-1]=='<')){
+    //go left
+    return solvePath(maze,maze_width,maze_height,col-1,row,sol);}
+  else if(((maze[row][col+1]!='#')&&(sol[row][col+1]=='u'))||(maze[row][col+1]=='<')){
+    //go right                                                                                  
+    return solvePath(maze,maze_width,maze_height,col+1,row,sol);}
+  else if(((maze[row-1][col]!='#')&&(sol[row-1][col]=='u'))||(maze[row-1][col]=='<')){
+    //go up                                                                                  
+    return solvePath(maze,maze_width,maze_height,col,row-1,sol);}
+  else if(((maze[row+1][col]!='#')&&(sol[row+1][col]=='u'))||(maze[row+1][col]=='<')){
+    //go down                                                                                   
+    return solvePath(maze,maze_width,maze_height,col+1,row-1,sol);}
+  return 1; // TODO: replace this stub
 }
 
 // The function to generate a maze (given)

@@ -14,14 +14,14 @@
  * \details This function takes four parameters: the name of the file to read, the maze itself, and the maze's width and height. The function reads the file, filling in maze's data, width and height. It returns 0 on success, -1 if failed to open the file to read, or -2 if encountering any other read error.
  */
 // TODO: write the readMaze function declaration
-int readMaze(filename, char maze[][200], const int maze_width, const int maze_height);
+int readMaze(char* filename, char maze[][200], int* maze_width, int* maze_height);
 /**
  * \brief The function to write the maze to a file
  *
  * \details This function takes four parameters: the name of the file to write, the maze itself, and the maze's width and height. The function writes the maze's data, width and height to the specified file. It returns 0 on success, -4 if failed to open the file to write, or -5 if encountering any other write error.
  */
 // TODO: write the writeMaze function declaration
-int writeMaze(filename, char maze[][200], const int maze_width, const int maze_height);
+int writeMaze(char*filename, char maze[][200], const int maze_width, const int maze_height);
 /**
  * \brief The function to solve a solution path for the maze
  *
