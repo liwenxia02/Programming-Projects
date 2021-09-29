@@ -21,6 +21,7 @@ int readMaze(char* filename, char maze[][200], int* maze_width, int* maze_height
     return -1;}
   char myChar;
   fscanf(mazePtr, "%d %d", maze_width, maze_height);
+  //printf("%d %d", *maze_width, *maze_height);
   for(int r = 0; r < *maze_height; ++r){
     for(int c = 0; c < *maze_width; ++c){
       fscanf(mazePtr,"%c",&myChar);

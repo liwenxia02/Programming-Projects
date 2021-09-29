@@ -11,7 +11,7 @@
 // The function to print the maze
 void printMaze(char maze[][200], const int maze_width, const int maze_height) {
   // TODO: implement this function
-  printf("Maze: %d, %d", maze_width, maze_height);
+  printf("Maze: %d, %d\n", maze_width, maze_height);
   for(int r = 0; r <maze_height; r++){
     for(int c = 0; c < maze_width; c++){
       if(c==maze_width-1){
@@ -52,9 +52,9 @@ printf("Solution path (*):\n");
 void printError(const int return_code, char* argv[]) {
   // TODO: implement this function
   if(return_code==1){
-    printf("No solution found for the input maze");}
+    printf("No solution found for the input maze\n");}
   if(return_code==2){
-    printf("Generate maze usage: ./hw3 <maze file> <width> <height> [threshold = 0.5] [seed = 0]\nSolve maze usage: ./hw3 <maze file>");}
+    printf("Generate maze usage: ./hw3 <maze file> <width> <height> [threshold = 0.5] [seed = 0]\nSolve maze usage: ./hw3 <maze file>\n");}
   if(return_code==-1){
-    printf("Cannot open %s to read",argv[1]);}
+    printf("Cannot open %s to read\n",argv[1]);}
 }
