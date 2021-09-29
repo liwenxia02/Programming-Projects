@@ -19,11 +19,12 @@ int readMaze(char* filename, char maze[][200], int* maze_width, int* maze_height
   FILE*mazePtr=fopen(filename,"r");
   if(mazePtr==NULL){
     return -1;}
-  char myChar;
+  char myChar,newline;
   fscanf(mazePtr, "%d %d", maze_width, maze_height);
+  fscanf(mazePtr, "%c",&newline);
   //printf("%d %d", *maze_width, *maze_height);
   for(int r = 0; r < *maze_height; ++r){
-    for(int c = 0; c < *maze_width; ++c){
+    for(int c = 0; c <= *maze_width; ++c){
       fscanf(mazePtr,"%c",&myChar);
       maze[r][c]=myChar;
     }
