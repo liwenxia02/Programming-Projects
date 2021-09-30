@@ -11,14 +11,14 @@
 // The function to print the maze
 void printMaze(char maze[][200], const int maze_width, const int maze_height) {
   // TODO: implement this function
-  printf("Maze: %d, %d\n", maze_width, maze_height);
+  printf("Maze: %d, %d\n", maze_width, maze_height); //printing the header
   for(int r = 0; r <maze_height; r++){
     for(int c = 0; c < maze_width; c++){
       if(c==maze_width-1){
-	printf("%c\n",maze[r][c]);
+	printf("%c\n",maze[r][c]); //prints a newline if at the end of the row
       }
       else{
-	printf("%c",maze[r][c]);}
+	printf("%c",maze[r][c]);}  //otherwise just prints a char
     }
   }
 }
@@ -32,7 +32,7 @@ printf("Solution path (*):\n");
    for(int c = 0; c < maze_width; ++c){
      if(sol[r][c]!='u'&&sol[r][c]!='v'){
 	 if(c==maze_width-1){
-        printf("%c\n",sol[r][c]);
+	   printf("%c\n",sol[r][c]); //prints the pathway and not where the unvisited and visited markers are
         }
         else{
           printf("%c",sol[r][c]);
@@ -40,7 +40,7 @@ printf("Solution path (*):\n");
      }
      else{
        if(c==maze_width-1){
-	 printf("%c\n",maze[r][c]);
+	 printf("%c\n",maze[r][c]); //prints the wall of the maze
        }
        else
 	 {

@@ -21,7 +21,7 @@ int readMaze(char* filename, char maze[][200], int* maze_width, int* maze_height
     return -1;}
   char myChar,newline;
   fscanf(mazePtr, "%d %d", maze_width, maze_height);
-  fscanf(mazePtr, "%c",&newline);
+  fscanf(mazePtr, "%c",&newline); //used to skip the newline character in the file
   //printf("%d %d", *maze_width, *maze_height);
   for(int r = 0; r < *maze_height; ++r){
     for(int c = 0; c <= *maze_width; ++c){
@@ -29,7 +29,7 @@ int readMaze(char* filename, char maze[][200], int* maze_width, int* maze_height
       maze[r][c]=myChar;
     }
   }
-  if(ferror(mazePtr)){
+  if(ferror(mazePtr)){ //error catching
     return -2;}
   fclose(mazePtr);
   return 0;
@@ -49,7 +49,7 @@ int writeMaze(char* filename, char maze[][200], const int maze_width, const int 
     for(int c = 0; c < maze_width; ++c){
       if(c==maze_width-1)
 	{
-	  fprintf(mazePtr, "%c\n", maze[r][c]);
+	  fprintf(mazePtr, "%c\n", maze[r][c]); //prints a newline char if at the end of the row
 	}
       else{
 	fprintf(mazePtr, "%c", maze[r][c]);
@@ -68,9 +68,9 @@ int solveMaze(char maze[][200], const int maze_width, const int maze_height, cha
     for(int c = 0; c < maze_width; c++){
       if(maze[r][c]=='@'){
 	 startingR=r;
-	 startingC=c;
+	 startingC=c; //keeps track of the starting point, not really used but i had it just in case
       }
-        sol[r][c]='u';
+      sol[r][c]='u'; //marks everything as unvisited
     }
   }
   return solvePath(maze, maze_width, maze_height, startingC, startingR, sol); 

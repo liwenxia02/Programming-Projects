@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
   // gen maze: ./hw3 <maze_file> <width> <height> [threshold = 0.5] [seed = 0]
 
   if ( /* TODO: Replace this stub to check command line arguments */
-      !(argc>1 && argc<7 ))
+      !(argc>1 && argc<7||argc==3 ))
     return_code = 2; // invalid input argument check
   else {
     char maze[200][200];
@@ -54,17 +54,10 @@ int main(int argc, char* argv[]) {
       //  return_code = -3;}
       maze_width=atoi(argv[2]);
       maze_height=atoi(argv[3]);
-
-      //checks if the given width and height are actually the height and width of the maze
-      for(int r = 0; r < 200; r++){
-	for(int c = 0; c < 200; c++){
-	  if(maze[r][c]=='#'&&(r>maze_height||c>maze_width)){
-	    return_code=-2;}
-	}
-      }
       
       int seed = 0;
       double threshold = 0.5;
+      //updates threshold and seed if they are put in by the user
       if(argc>=5){
 	threshold = atof(argv[4]);
         if(argc==6){
