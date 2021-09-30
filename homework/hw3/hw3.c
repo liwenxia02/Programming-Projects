@@ -20,8 +20,10 @@ int main(int argc, char* argv[]) {
   // gen maze: ./hw3 <maze_file> <width> <height> [threshold = 0.5] [seed = 0]
 
   if ( /* TODO: Replace this stub to check command line arguments */
-      !(argc>1 && argc<7||argc==3 ))
+      !(argc>1 && argc<7))
     return_code = 2; // invalid input argument check
+  if(argc==3){
+    return_code=2;}
   else {
     char maze[200][200];
     
