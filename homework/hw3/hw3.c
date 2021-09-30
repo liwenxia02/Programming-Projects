@@ -21,14 +21,18 @@ int main(int argc, char* argv[]) {
 
   if ( /* TODO: Replace this stub to check command line arguments */
       !(argc>1 && argc<7 ))
-    return_code = 2; // invalid input arguments
+    return_code = 2; // invalid input argument check
   else {
     char maze[200][200];
+    
+    
     int maze_width = 0;
     int maze_height = 0;
     if (argc == 2) { // solve maze
       // read maze file
-      return_code = readMaze(argv[1], maze, &maze_width, &maze_height) ;   // TODO: replace with call to your readMaze function 
+      return_code = readMaze(argv[1], maze, &maze_width, &maze_height) ;   // TODO: replace with call to your readMaze function
+      
+      
       if (!return_code) {
         // print maze
         printMaze(maze, maze_width, maze_height);
@@ -50,6 +54,15 @@ int main(int argc, char* argv[]) {
       //  return_code = -3;}
       maze_width=atoi(argv[2]);
       maze_height=atoi(argv[3]);
+
+      //checks if the given width and height are actually the height and width of the maze
+      for(int r = 0; r < 200; r++){
+	for(int c = 0; c < 200; c++){
+	  if(maze[r][c]=='#'&&(r>maze_height||c>maze_width)){
+	    return_code=-2;}
+	}
+      }
+      
       int seed = 0;
       double threshold = 0.5;
       if(argc>=5){
@@ -59,7 +72,7 @@ int main(int argc, char* argv[]) {
       }
       // TODO: add your argument parsing code and input validation code here
       // remember to set the correct return_code
-      
+            
       if (!return_code) {
         // gen maze
         genMaze(maze, maze_width, maze_height, threshold, seed);
