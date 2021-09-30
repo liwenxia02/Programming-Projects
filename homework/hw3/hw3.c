@@ -19,8 +19,7 @@ int main(int argc, char* argv[]) {
   // solve maze: ./hw3 <maze_file>
   // gen maze: ./hw3 <maze_file> <width> <height> [threshold = 0.5] [seed = 0]
 
-  if ( /* TODO: Replace this stub to check command line arguments */
-      !(argc>1 && argc<7))
+  if ( argc!=1 && argc!=2 && argc !=4 && argc!=5 && argc !=6)
     return_code = 2; // invalid input argument check
   if(argc==3){
     return_code=2;}
@@ -49,11 +48,12 @@ int main(int argc, char* argv[]) {
     }
     else { // gen maze
       // parse input arguments
-      if(atoi(argv[2])<1||atoi(argv[3])<1)
+      if(atoi(argv[2])<0||atoi(argv[3])<0)
+        {
+          return_code = -3;}
+      if(atoi(argv[2])==0||atoi(argv[3])==0)
 	{
-	  return_code = -3;}
-      // if(!isdigit(atoi(argv[2]))||!isdigit(atoi(argv[3])){
-      //  return_code = -3;}
+	  return_code = 2;}
       maze_width=atoi(argv[2]);
       maze_height=atoi(argv[3]);
       
