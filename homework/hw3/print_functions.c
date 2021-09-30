@@ -30,25 +30,26 @@ void printSolution(char maze[][200], const int maze_width, const int maze_height
 printf("Solution path (*):\n");
  for(int r = 0; r <maze_height; ++r){
    for(int c = 0; c < maze_width; ++c){
-     if(sol[r][c]!='u'){
+     if(sol[r][c]!='u'&&sol[r][c]!='v'){
 	 if(c==maze_width-1){
         printf("%c\n",sol[r][c]);
         }
         else{
-          printf("%c",sol[r][c]);}
-        }  
-     if(maze[r][c]=='#' || maze[r][c]=='@' || maze[r][c]=='<'){
-	{
-	  if(c==maze_width-1){
-        printf("%c\n",maze[r][c]);
-        }
-        else{
-          printf("%c",maze[r][c]);}
+          printf("%c",sol[r][c]);
 	}
+     }
+     else{
+       if(c==maze_width-1){
+	 printf("%c\n",maze[r][c]);
+       }
+       else
+	 {
+	   printf("%c",maze[r][c]);}
      }
    }
  }
 }
+
 // The function to print the error message
 void printError(const int return_code, char* argv[]) {
   // TODO: implement this function
