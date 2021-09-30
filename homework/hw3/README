@@ -1,0 +1,4 @@
+96826C
+I included string functions to get access to isdigit to test if inputs are numerical and not strings
+I changed the start/endpoint in the solution array to @ and < respectively so that it would show on the solution path and make it easier to print
+I have trouble catching all of the errors
