@@ -30,21 +30,22 @@ void printSolution(char maze[][200], const int maze_width, const int maze_height
 printf("Solution path (*):\n");
  for(int r = 0; r <maze_height; ++r){
    for(int c = 0; c < maze_width; ++c){
-      if(sol[r][c]=='*'){
-	if(c==maze_width-1){
+     if(sol[r][c]!='u'){
+	 if(c==maze_width-1){
         printf("%c\n",sol[r][c]);
         }
         else{
           printf("%c",sol[r][c]);}
         }  
-      else
+     if(maze[r][c]=='#' || maze[r][c]=='@' || maze[r][c]=='<'){
 	{
 	  if(c==maze_width-1){
         printf("%c\n",maze[r][c]);
         }
         else{
           printf("%c",maze[r][c]);}
-   }
+	}
+     }
    }
  }
 }
@@ -52,7 +53,7 @@ printf("Solution path (*):\n");
 void printError(const int return_code, char* argv[]) {
   // TODO: implement this function
   if(return_code==1){
-    printf("No solution found for the input maze\n");}
+    printf("Info: No solution found for the input maze\n");}
   if(return_code==2){
     printf("Generate maze usage: ./hw3 <maze file> <width> <height> [threshold = 0.5] [seed = 0]\nSolve maze usage: ./hw3 <maze file>\n");}
   if(return_code==-1){

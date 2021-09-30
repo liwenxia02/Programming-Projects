@@ -68,10 +68,9 @@ int solveMaze(char maze[][200], const int maze_width, const int maze_height, cha
     for(int c = 0; c < maze_width; c++){
       if(maze[r][c]=='@'){
 	 startingR=r;
-	 startingC=c;}
-      if(maze[r][c]==' '){
-        sol[r][c]='u';
+	 startingC=c;
       }
+        sol[r][c]='u';
     }
   }
   return solvePath(maze, maze_width, maze_height, startingC, startingR, sol); 
@@ -81,22 +80,24 @@ int solveMaze(char maze[][200], const int maze_width, const int maze_height, cha
 int solvePath(char maze[][200], const int maze_width, const int maze_height, const int col, const int row, char sol[][200]) {
   // TODO: implement this function
   //don't forget left, right, up, down
-  sol[row][col]='*';
-  if(maze[row][col]=='<'){ //base case
+  if(maze[row][col]=='@'){
+    //marks location of starting point in the solution array
+    sol[row][col]='@';}
+  if(maze[row][col]=='<'){
+    //marks location of ending point in the solution array
+    sol[row][col]='<';//base case for recursion
     return 0;}
-  if(((maze[row][col-1]!='#')&&(sol[row][col-1]=='u'))||(maze[row][col-1]=='<')){
-    //go left
-    return solvePath(maze,maze_width,maze_height,col-1,row,sol);}
-  else if(((maze[row][col+1]!='#')&&(sol[row][col+1]=='u'))||(maze[row][col+1]=='<')){
-    //go right                                                                                  
-    return solvePath(maze,maze_width,maze_height,col+1,row,sol);}
-  else if(((maze[row-1][col]!='#')&&(sol[row-1][col]=='u'))||(maze[row-1][col]=='<')){
-    //go up                                                                                  
-    return solvePath(maze,maze_width,maze_height,col,row-1,sol);}
-  else if(((maze[row+1][col]!='#')&&(sol[row+1][col]=='u'))||(maze[row+1][col]=='<')){
-    //go down                                                                                   
-    return solvePath(maze,maze_width,maze_height,col+1,row-1,sol);}
-  return 1; // TODO: replace this stub
+  else if(sol[row][col]!='v' && maze[row][col]!= '#'){
+    if(maze[row][col]!='@'){
+      sol[row][col]= 'v';} //marking as visited
+    if(!solvePath(maze,maze_width,maze_height,col-1,row,sol)||!solvePath(maze,maze_width,maze_height,col+1,row,sol)||!solvePath(maze,maze_width,maze_height,col,row-1,sol)||!solvePath(maze,maze_width,maze_height,col,row+1,sol)){ //checks each direction in order from left, right, up and down
+      if(maze[row][col]!='@'){
+	sol[row][col] = '*';}
+      return 0;
+    }
+    else{return 1;} //if no free blocks and not at the end, return 1
+  }
+  else{return 1;} //if we've already been here or it's a wall, then return 1
 }
 
 // The function to generate a maze (given)

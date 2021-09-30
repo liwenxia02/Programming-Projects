@@ -46,14 +46,16 @@ int main(int argc, char* argv[]) {
       if(atoi(argv[2])<1||atoi(argv[3])<1)
 	{
 	  return_code = -3;}
+      // if(!isdigit(atoi(argv[2]))||!isdigit(atoi(argv[3])){
+      //  return_code = -3;}
       maze_width=atoi(argv[2]);
       maze_height=atoi(argv[3]);
       int seed = 0;
       double threshold = 0.5;
-      if(argc==5){
+      if(argc>=5){
 	threshold = atof(argv[4]);
         if(argc==6){
-	    seed = atoi(argv[5]);}
+	 seed = atoi(argv[5]);}
       }
       // TODO: add your argument parsing code and input validation code here
       // remember to set the correct return_code
