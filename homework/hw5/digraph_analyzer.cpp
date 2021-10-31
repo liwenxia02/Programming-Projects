@@ -87,13 +87,13 @@ int main(int argc, char * argv[]) {
       printcontainingwords(ival,graphlist);
     }
     else{ //then we know it is a string
-      int digraphbool = 0;
+      int digraphbool = 0; //checks if the user input is one of our digraphs
       for(int i = 0; i < num; i++){
 	if(!strcmp(graphs[i].c_str(), userinput.c_str())){
 	  digraphbool++;
 	}
       }
-      if(digraphbool>0){
+      if(digraphbool>0){ //if the input is actually a digraph in our list
 	printnumandwords(userinput, graphlist);
       }
       else{

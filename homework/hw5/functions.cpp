@@ -50,15 +50,15 @@ void cprint(map<string,vector<string>> graph){
   //uses recursion to print all elements from largest to smallest, using ASCII as the tiebreaker
   map<string,vector<string>> graphlist = graph;
   size_t largestlength = 0;
-  string currentkey;
+  string currentkey = graphlist.begin()->first;
   for(map<string, vector<string>>::iterator it = graphlist.begin(); it!=graphlist.end(); ++it){
     //finds the longest digraph/trigraph in ASCII order                                                                                 
-    if (largestlength < (it->first).length()){
-      largestlength = (it->first).length();
+    if (largestlength < (it->second).size()){
+      largestlength = (it->second).size();
       currentkey = it->first;
     }
   }
-  //prints the longest digraph/trigraph and the words that contain it                                                                   
+  //prints the longest vector of values and the words that contain it                                                                   
   cout << currentkey << ": [";
   for(vector<string>::iterator vit = graphlist[currentkey].begin(); vit!=graphlist[currentkey].end(); vit++){
     cout << *vit;
@@ -68,7 +68,7 @@ void cprint(map<string,vector<string>> graph){
   }
   cout << "]" <<endl;
   graphlist.erase(currentkey);
-  if(!graphlist.empty()){
+  if(!graphlist.size()==0){
     cprint(graphlist);
   }
 }
