@@ -13,8 +13,30 @@ using std::endl;
 using std::map;
 using std::vector;
 
-void cprint(map<string,vector<string>> graphlist){
-  //uses recursion to print all elements from largest to smallest, using ASCII as the tiebreaker                                        
+void printcontainingwords(int num, std::map<std::string,std::vector<std::string>> graphlist){
+  //prints out the key and values when the length of values is equal to the given num
+  int numprinted = 0;
+  for(map<string, vector<string>>::iterator it = graphlist.begin(); it!=graphlist.end(); ++it){
+    if((int)(it->second).size()==num){ //checks if size is equal to the num we want to print out
+      numprinted ++;
+      cout << it->first << ": [";
+      for(vector<string>::iterator vit = (it->second).begin(); vit!=(it->second).end(); vit++){
+        cout << *vit;
+        if(vit+1!=(it->second).end()){ //prints comma if element is not the final element                                                        
+          cout << ", ";
+        }
+      }
+    cout << "]" << endl;
+    }
+  }
+  if(numprinted==0){ //if we didn't print anything
+    cout <<"None"<<endl;
+  }
+}
+
+void cprint(map<string,vector<string>> graph){
+  //uses recursion to print all elements from largest to smallest, using ASCII as the tiebreaker
+  map<string,vector<string>> graphlist = graph;
   size_t largestlength = 0;
   string currentkey;
   for(map<string, vector<string>>::iterator it = graphlist.begin(); it!=graphlist.end(); ++it){

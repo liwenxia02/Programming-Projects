@@ -6,8 +6,11 @@
 #include <algorithm>
 #include <cstring>
 #include "functions.h"
+#include <sstream>
 
+using std::stringstream;
 using std::cout;
+using std::cin;
 using std::string;
 using std::endl;
 using std::map;
@@ -69,6 +72,19 @@ int main(int argc, char * argv[]) {
   }
   else if(!strcmp(argv[2],"c")){
     cprint(graphlist);
+  }
+
+  //portion where the user can input a number, a digraph, or the word exit
+  string userinput;
+  while(cout<<"q?>", cin>>userinput){
+    if (!strcmp(userinput.c_str(), "exit")){ //ends the program if exit is typed
+      return 0;
+    }
+    stringstream ss1(userinput);
+    int ival;
+    if(ss1>>ival){ //checks if userinput is an integer
+      printcontainingwords(ival,graphlist);
+    }
   }
   return 0;
 }
