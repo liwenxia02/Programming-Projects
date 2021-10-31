@@ -1,0 +1,5 @@
+92826C
+For my program, I used a separate file called functions.cpp and a header file called functions.h to organize my functions
+Instead of writing everything in digraph_analyzer.cpp, I decided it would be more efficient and less jumbled to separate
+my code in this method. I defined my functions using keywords that would help me remember what the functions did. I also
+added comments underneath all of my functions so I was 100% sure what they were meant to do.
