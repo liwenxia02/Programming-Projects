@@ -34,6 +34,18 @@ void printcontainingwords(int num, std::map<std::string,std::vector<std::string>
   }
 }
 
+void printnumandwords(string digraph, std::map<std::string,std::vector<std::string>> graphlist){
+  //prints number of words the containing the digraph and all words inluding the digraph
+  cout << graphlist[digraph].size() << ": [";
+  for(vector<string>::iterator vit = graphlist[digraph].begin(); vit!=graphlist[digraph].end(); vit++){
+    cout << *vit;
+    if(vit+1!=graphlist[digraph].end()){ //prints comma if element is not the final element                                                      
+      cout << ", ";
+    }
+  }
+  cout << "]" << endl;
+}
+
 void cprint(map<string,vector<string>> graph){
   //uses recursion to print all elements from largest to smallest, using ASCII as the tiebreaker
   map<string,vector<string>> graphlist = graph;

@@ -77,6 +77,7 @@ int main(int argc, char * argv[]) {
   //portion where the user can input a number, a digraph, or the word exit
   string userinput;
   while(cout<<"q?>", cin>>userinput){
+    transform(userinput.begin(),userinput.end(),userinput.begin(), ::tolower);
     if (!strcmp(userinput.c_str(), "exit")){ //ends the program if exit is typed
       return 0;
     }
@@ -84,6 +85,20 @@ int main(int argc, char * argv[]) {
     int ival;
     if(ss1>>ival){ //checks if userinput is an integer
       printcontainingwords(ival,graphlist);
+    }
+    else{ //then we know it is a string
+      int digraphbool = 0;
+      for(int i = 0; i < num; i++){
+	if(!strcmp(graphs[i].c_str(), userinput.c_str())){
+	  digraphbool++;
+	}
+      }
+      if(digraphbool>0){
+	printnumandwords(userinput, graphlist);
+      }
+      else{
+	cout <<"No such digraph"<< endl;
+      }
     }
   }
   return 0;
