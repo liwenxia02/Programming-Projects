@@ -14,6 +14,10 @@ using std::vector;
 
 void rprint(map<string,vector<string>> graphlist); //prints in reverse ASCII order
 
+void aprint(map<string,vector<string>> graphlist); //prints in ascending ASCII order  
+
+void cprint(map<string,vector<string>> graphlist); //prints from largest to smallest, ties broken with ASCII
+
 int findphrase(string word, string phrase); //checks if a word contains a certain phrase
 
 string removepunctuation(string word); //removes . , ! ? from a word
@@ -67,13 +71,56 @@ int main(int argc, char * argv[]) {
 
   //print map depending on which letter is given in the argument
   if(!strcmp(argv[2],"a")){
+    aprint(graphlist);
   }
   else if(!strcmp(argv[2],"r")){
     rprint(graphlist);
   }
-  else if(!strcmp(argv[2],"a")){
+  else if(!strcmp(argv[2],"c")){
+    cprint(graphlist);
   }
   return 0;
+}
+//end of main 
+
+void cprint(map<string,vector<string>> graphlist){
+  //uses recursion to print all elements from largest to smallest, using ASCII as the tiebreaker
+  size_t largestlength = 0;
+  string currentkey;
+  for(map<string, vector<string>>::iterator it = graphlist.begin(); it!=graphlist.end(); ++it){
+    //finds the longest digraph/trigraph in ASCII order
+    if (largestlength < (it->first).length()){
+      largestlength = (it->first).length();
+      currentkey = it->first;
+    }
+  }
+  //prints the longest digraph/trigraph and the words that contain it
+  cout << currentkey << ": [";
+  for(vector<string>::iterator vit = graphlist[currentkey].begin(); vit!=graphlist[currentkey].end(); vit++){
+    cout << *vit;
+    if(vit+1!=graphlist[currentkey].end()){
+      cout << ", ";
+    }
+  }
+  cout << "]" <<endl;
+  graphlist.erase(currentkey);
+  if(!graphlist.empty()){
+    cprint(graphlist);
+  }
+}
+
+void aprint(map<string,vector<string>> graphlist){
+  //prints everything in ascending ASCII order
+  for(map<string, vector<string>>::iterator it = graphlist.begin(); it!=graphlist.end(); ++it){
+    cout << it->first << ": [";
+    for(vector<string>::iterator vit = (it->second).begin(); vit!=(it->second).end(); vit++){
+      cout << *vit;                      
+      if(vit+1!=(it->second).end()){ //prints comma if element is not the final element                                                
+        cout << ", ";
+      }
+    }
+    cout << "]" << endl;
+  }
 }
 
 void rprint(map<string,vector<string>> graphlist){
@@ -82,8 +129,7 @@ void rprint(map<string,vector<string>> graphlist){
     cout << it->first << ": [";
     for(vector<string>::iterator vit = (it->second).begin(); vit!=(it->second).end(); vit++){
       cout << *vit;
-      vector<string>::iterator temp = vit + 1; //temporaray iterator to see if current element is the final one
-      if(temp!=(it->second).end()){ //prints comma if element is not the final element
+      if(vit+1!=(it->second).end()){ //prints comma if element is not the final element
 	cout << ", ";
       }
     }      
