@@ -30,16 +30,16 @@ int main(void) {
       min_so_far = gl.mygrades()[i];
     }
   }
-  cout<< "Minimum: " << min_so_far<<endl;
   double max_so_far = 0.0;
   for (size_t i = 0; i < gl.mygrades().size(); i++) {
     if (gl.mygrades()[i] > max_so_far) {
       max_so_far = gl.mygrades()[i];
     }
   }
-  cout<< "Maximum: " << max_so_far<<endl;
-  cout<< "Median: " << gl.median()<<endl;
   cout<< "Mean: " << gl.mean()<<endl;
-  cout<< "75th Percentile: " <<gl.percentile(75.0)<<endl;
+  cout<< "Min: " << min_so_far<<endl;
+  cout<< "Max: " << max_so_far<<endl;
+  cout<< "Median: " << gl.median()<<endl;
+  cout<< "75th percentile: " <<gl.percentile(75.0)<<endl;
   return 0;
 }
